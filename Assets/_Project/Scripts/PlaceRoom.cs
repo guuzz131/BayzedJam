@@ -5,44 +5,54 @@ using UnityEngine;
 
 public class PlaceRoom : MonoBehaviour
 {
-    [SerializeField] private GameObject room;
     [SerializeField] private GameObject roomPreview;
 
     private GameObject currentPreview;
+    private GameObject selectedRoomType;
+
+    private bool showPreview;
+    private Vector2 lastValidPosition;
 
     private void Update()
     {
-        /*
-        if (Input.GetMouseButton(0))
+        if (showPreview)
         {
+            ShowPreview();
+
             if (ValidPosition())
             {
-                if (currentPreview == null) currentPreview = Instantiate(roomPreview, RoomPosition().point, Quaternion.identity);
-                ShowPreview();
+                lastValidPosition = RoomPosition().point;
             }
-        }
-
-        if (Input.GetMouseButtonUp(0))
-        {
-            if(currentPreview != null) PlaceNewRoom();
-            Destroy(currentPreview);
         }
 
         if (Input.GetMouseButtonDown(1))
         {
+            showPreview = false;
             Destroy(currentPreview);
         }
-        */
+
+        if (showPreview && Input.GetMouseButtonDown(0))
+        {
+            PlaceNewRoom();
+        }
+    }
+
+    public void SelectType(GameObject newRoom)
+    {
+        selectedRoomType = newRoom;
+        showPreview = true;
     }
 
     private void ShowPreview()
     {
-        currentPreview.transform.position = RoomPosition().point;
+        if (currentPreview == null) currentPreview = Instantiate(roomPreview, lastValidPosition, Quaternion.identity);
+        if (ValidPosition()) currentPreview.transform.position = lastValidPosition;
     }
 
     private void PlaceNewRoom()
     {
-        Instantiate(room, RoomPosition().point, Quaternion.identity, transform);
+        Instantiate(selectedRoomType, lastValidPosition, Quaternion.identity, transform);
+        showPreview = false;
     }
 
     private Vector2 GetMousePos()

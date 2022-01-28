@@ -8,7 +8,6 @@ public class Hotel : MonoBehaviour
 {
     public static Hotel Instance;
     
-    public List<Block> blocks = new List<Block>();
     public List<Room> rooms = new List<Room>();
 
     [SerializeField] private float breakingPointAngle = 10f;
