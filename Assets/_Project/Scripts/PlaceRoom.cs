@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class PlaceRoom : MonoBehaviour
 {
+    [SerializeField] private LayerMask mask;
     private GameObject currentBlock;
     private GameObject currentPreview;
     private GameObject selectedRoomType;
@@ -46,7 +47,7 @@ public class PlaceRoom : MonoBehaviour
     private void ShowPreview()
     {
         if (currentPreview == null) currentPreview = Instantiate(currentBlock, RoomPosition(), Hotel.Instance.transform.rotation);
-        if (HittingAnything()){ currentPreview.transform.position = RoomPosition();}
+        if (HittingAnything()) { currentPreview.transform.position = RoomPosition(); }
         else currentPreview.transform.position = GetMousePos();
 
         currentPreview.transform.rotation = Hotel.Instance.transform.rotation;
@@ -70,13 +71,13 @@ public class PlaceRoom : MonoBehaviour
         if (currentPreview == null) return false;
         for (int i = 0; i < currentPreview.GetComponent<Block>().rooms.Count; i++)
         {
-            Vector2 offset = (Vector2) currentPreview.GetComponent<Block>().rooms[i].transform.position - (Vector2)currentPreview.GetComponent<Block>().rooms[i].transform.parent.position;
+            Vector2 offset = (Vector2)currentPreview.GetComponent<Block>().rooms[i].transform.position - (Vector2)currentPreview.GetComponent<Block>().rooms[i].transform.parent.position;
             Vector2 pointInTheSky = new Vector2(GetMousePos().x, GetMousePos().y) + offset + (Vector2)Hotel.Instance.transform.up * 100f;
-            
+
             foreach (var point in currentPreview.GetComponent<Block>().rooms[i].GetComponent<PreviewBlock>().sides)
             {
                 Vector2 direction = ((Vector2)point.position - pointInTheSky).normalized;
-                RaycastHit2D hit = Physics2D.Raycast(pointInTheSky, direction, Mathf.Infinity);
+                RaycastHit2D hit = Physics2D.Raycast(pointInTheSky, direction, Mathf.Infinity, mask);
                 Debug.DrawRay(pointInTheSky, direction * 120f, Color.red);
                 if (hit.collider != null)
                 {
@@ -96,12 +97,12 @@ public class PlaceRoom : MonoBehaviour
         {
             for (int i = 0; i < currentPreview.GetComponent<Block>().rooms.Count; i++)
             {
-                Vector2 offset = (Vector2) currentPreview.GetComponent<Block>().rooms[i].transform.position - (Vector2)currentPreview.GetComponent<Block>().rooms[i].transform.parent.position;
+                Vector2 offset = (Vector2)currentPreview.GetComponent<Block>().rooms[i].transform.position - (Vector2)currentPreview.GetComponent<Block>().rooms[i].transform.parent.position;
                 Vector2 pointInTheSky = new Vector2(GetMousePos().x, GetMousePos().y) + offset + (Vector2)Hotel.Instance.transform.up * 100f;
                 foreach (var point in currentPreview.GetComponent<Block>().rooms[i].GetComponent<PreviewBlock>().sides)
                 {
                     Vector2 direction = ((Vector2)point.position - pointInTheSky).normalized;
-                    RaycastHit2D hit = Physics2D.Raycast(pointInTheSky, direction, Mathf.Infinity);
+                    RaycastHit2D hit = Physics2D.Raycast(pointInTheSky, direction, Mathf.Infinity, mask);
                     Debug.DrawRay(pointInTheSky, direction * 120f, Color.red);
                     if (hit.collider != null)
                     {

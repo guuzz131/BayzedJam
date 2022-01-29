@@ -42,6 +42,8 @@ public class PeopleController : MonoBehaviour
     private Vector2 newRoomPos;
     private GameObject newRoom;
 
+    int totalRoomCountAngel;
+    int totalRoomCountDevil;
 
     private void Start()
     {
@@ -85,6 +87,34 @@ public class PeopleController : MonoBehaviour
                 people.GetComponent<SpriteRenderer>().color = Color.white;
             }
             selectedPeople.Clear();
+        }
+
+
+        if(totalRoomCountAngel != heavenRooms.Count)
+        {
+            for(int i = 0; i < heavenRooms.Count - totalRoomCountAngel; i++)
+            {
+                if(waitingAngels.Count > 0)
+                {
+                    waitingAngels[0].transform.SetParent(hotelPivot, true);
+                    MovePersonToNewRoom(waitingAngels[0]);
+                    waitingAngels.RemoveAt(0);
+                }
+            }
+            totalRoomCountAngel = heavenRooms.Count;
+        }
+        if(totalRoomCountDevil != hellRooms.Count)
+        {
+            for (int i = 0; i < hellRooms.Count - totalRoomCountDevil; i++)
+            {
+                if (waitingDevils.Count > 0)
+                {
+                    waitingDevils[0].transform.SetParent(hotelPivot, true);
+                    MovePersonToNewRoom(waitingDevils[0]);
+                    waitingDevils.RemoveAt(0);
+                }
+            }
+            totalRoomCountDevil = hellRooms.Count;
         }
     }
 

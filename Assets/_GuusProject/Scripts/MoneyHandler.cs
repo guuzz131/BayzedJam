@@ -14,6 +14,7 @@ public class MoneyHandler : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        money = 50;
     }
 
     private void Update()

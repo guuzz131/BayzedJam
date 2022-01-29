@@ -20,11 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - HeavenBackground:
-        m_Texture: {fileID: 2800000, guid: ad27840208d9df641b2e388fcf54e203, type: 3}
+        m_Texture: {fileID: 2800000, guid: 61c542f299f61734ca73955a079a1ea4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - HellBackground:
-        m_Texture: {fileID: 2800000, guid: b920b271d06dea740b523516181eb949, type: 3}
+        m_Texture: {fileID: 2800000, guid: 77e8db0fee7b83842bd8f308f538939a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - RenderTex:
@@ -49,17 +49,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - GradientPower: 1.17
+    - GradientPower: 0.62
     - HueHeaven: 0
     - HueHell: 0
-    - NoiseScale: 100.7
-    - PixelAmount: 485.8
+    - NoiseScale: 169.07
+    - PixelAmount: 920.9
     - SaturationHeaven: 1
     - SaturationHell: 1
     - ScrollSpeed: 1
-    - StepEdge: 0.57
+    - Smoothstep1: 0.36
+    - Smoothstep2: 0.56
+    - StepEdge: 0.5
     m_Colors:
-    - Tiling: {r: 1, g: 1, b: 2, a: 0}
-    - TilingPixels: {r: 1, g: 1, b: 0, a: 0}
-    - _Offset: {r: 0, g: 0, b: 0, a: 0}
+    - OffsetPixels_1: {r: 0, g: 0, b: 0, a: 0}
+    - Tiling: {r: 2, g: 1, b: 2, a: 0}
+    - TilingPixels: {r: 1, g: 0.5, b: 0, a: 0}
+    - _Offset: {r: 0, g: -0.17, b: 0, a: 0}
   m_BuildTextureStacks: []
