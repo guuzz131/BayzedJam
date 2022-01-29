@@ -1,11 +1,9 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Collections;
-using System.Collections.Generic;
 
 public class Room : MonoBehaviour
 {
+    [SerializeField] private float xWeightMultiplier;
     [SerializeField] private float yWeightMultiplier;
     [SerializeField] private TextMesh weightText;
     public float currentWeight;
@@ -13,12 +11,13 @@ public class Room : MonoBehaviour
     private void Awake()
     {
         FindObjectOfType<Hotel>().AddRoom(this);
+        FindObjectOfType<PeopleController>().CheckRoomSide(gameObject);
     } 
 
     private float GetWeight()
     {
-        float xValue = transform.position.x;
-        float yValue = (transform.position.y * yWeightMultiplier);
+        float xValue = (transform.localPosition.x + transform.parent.localPosition.x) * xWeightMultiplier;
+        float yValue = transform.localPosition.y * yWeightMultiplier;
         float currentWeight = xValue * yValue;
         return currentWeight;
     }
@@ -26,6 +25,6 @@ public class Room : MonoBehaviour
     private void Update()
     {
         currentWeight = GetWeight();
-        weightText.text = currentWeight.ToString();
+        weightText.text = currentWeight.ToString("0.00");
     }
 }

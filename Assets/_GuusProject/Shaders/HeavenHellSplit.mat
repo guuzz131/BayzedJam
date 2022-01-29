@@ -50,8 +50,8 @@ Material:
     m_Ints: []
     m_Floats:
     - GradientPower: 1.17
-    - NoiseScale: 49.27
-    - PixelAmount: 145.23
+    - NoiseScale: 100.7
+    - PixelAmount: 485.8
     - ScrollSpeed: 1
     - StepEdge: 0.51
     m_Colors:

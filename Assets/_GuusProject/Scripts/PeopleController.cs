@@ -10,8 +10,6 @@ public class PeopleController : MonoBehaviour
     [SerializeField] List<People> people = new List<People>();
 
     [SerializeField] List<People> selectedPeople = new List<People>();
-
-    [SerializeField] List<GameObject> rooms = new List<GameObject>();
     
     [Header("Devils")]
     [SerializeField] List<GameObject> hellRooms = new List<GameObject>();
@@ -46,7 +44,6 @@ public class PeopleController : MonoBehaviour
 
     private void Start()
     {
-        CheckRoomSide();
         StartCoroutine(SpawnPeople());
     }
     private void Update()
@@ -199,30 +196,29 @@ public class PeopleController : MonoBehaviour
     }
 
 
-    void CheckRoomSide()
+    public void CheckRoomSide(GameObject room)
     {
-        foreach(var room in rooms)
+        
+        Vector2 relativeRoomPos = Vector2.zero;
+        if (room.transform.parent != null)
         {
-            Vector2 relativeRoomPos = Vector2.zero;
-            if (room.transform.parent != null)
-            {
-                relativeRoomPos = room.transform.localPosition + room.transform.parent.localPosition;
-            }
-
-            if(relativeRoomPos.x < 0)
-            {
-                heavenRooms.Add(room);
-                //heavenAvailibleRooms.Add(room);
-                room.GetComponent<RoomSpriteController>().ChangeSide(true);
-            }
-            else
-            {
-                hellRooms.Add(room);
-                //hellAvailibleRooms.Add(room);
-                room.GetComponent<RoomSpriteController>().ChangeSide(false);
-            }
+            relativeRoomPos = room.transform.localPosition + room.transform.parent.localPosition;
         }
-        heavenAvailibleRooms = heavenRooms;
-        hellAvailibleRooms = hellRooms;
+
+        if(relativeRoomPos.x < 0)
+        {
+            heavenRooms.Add(room);
+            heavenAvailibleRooms.Add(room);
+            room.GetComponent<RoomSpriteController>().ChangeSide(true);
+        }
+        else
+        {
+            hellRooms.Add(room);
+            hellAvailibleRooms.Add(room);
+            room.GetComponent<RoomSpriteController>().ChangeSide(false);
+        }
+        
+        //heavenAvailibleRooms = heavenRooms;
+        //hellAvailibleRooms = hellRooms;
     }
 }

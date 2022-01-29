@@ -1,17 +1,16 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Windows.WebCam;
 
 public class Hotel : MonoBehaviour
 {
     public static Hotel Instance;
     
-    public List<Block> blocks = new List<Block>();
     public List<Room> rooms = new List<Room>();
 
     [SerializeField] private float breakingPointAngle = 10f;
+    [SerializeField] private float rotationSpeed = .01f;
+    [SerializeField] private float wankelSpeed;
+    [SerializeField] private float wankelAmount;
 
     private void Awake()
     {
@@ -29,7 +28,7 @@ public class Hotel : MonoBehaviour
         
         foreach (var room in rooms)
         {
-            currentWeight += room.currentWeight;
+            currentWeight -= room.currentWeight;
         }
         
         return currentWeight;
@@ -37,8 +36,11 @@ public class Hotel : MonoBehaviour
 
     private void Rotate(float angle)
     {
-        transform.rotation = Quaternion.Euler(0f, 0f, -angle);
-        if (Mathf.Abs(angle) > breakingPointAngle) print("the hotel broke!");
+        transform.rotation = Quaternion.RotateTowards(
+            transform.rotation,
+            Quaternion.Euler(0f, 0f, angle + Mathf.Sin(Time.time * wankelSpeed) * wankelAmount),
+            rotationSpeed * Time.deltaTime);
+        if (Mathf.Abs(transform.rotation.z) > breakingPointAngle) print("the hotel broke!");
     }
 
     public void AddRoom(Room room)
