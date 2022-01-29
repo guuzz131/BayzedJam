@@ -6,10 +6,13 @@ public class RoomSpriteController : MonoBehaviour
 {
     [SerializeField] GameObject[] heavenRooms;
     [SerializeField] GameObject[] hellRooms;
+    [SerializeField] bool isMenu;
+    [SerializeField] bool isAngel;
 
     private void OnEnable()
     {
         //spriteRenderer.sprite = neutralRoomSprite;
+        if (isMenu) ChangeSide(isAngel);
     }
 
     public void ChangeSide(bool isAngel)

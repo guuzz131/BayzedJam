@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Hotel : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class Hotel : MonoBehaviour
     [SerializeField] private PeopleController peopleController;
 
     public bool dead;
+    bool reloadscene;
 
     private void Awake()
     {
@@ -34,12 +36,17 @@ public class Hotel : MonoBehaviour
     private float EvaluateAngle()
     {
         float currentWeight = 0f;
-        
+
         foreach (var room in rooms)
         {
             currentWeight -= room.currentWeight;
         }
-        
+
+        foreach (var person in peopleController.peopleInHouse)
+        {
+            currentWeight -= person.GetComponent<People>().GetCurrentWeight();
+        }
+
         return currentWeight;
     }
 
@@ -93,8 +100,8 @@ public class Hotel : MonoBehaviour
 
     IEnumerator WaitForKill()
     {
-        yield return new WaitForSeconds(1f);
-        if(transform.rotation.y < 0)
+        yield return new WaitForSeconds(2f);
+        if(transform.rotation.z > 0)
         {
             foreach(var angel in peopleController.angels)
             {
@@ -108,5 +115,7 @@ public class Hotel : MonoBehaviour
                 devil.gameObject.SetActive(false);
             }
         }
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

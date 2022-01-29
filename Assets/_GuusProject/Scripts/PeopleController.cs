@@ -8,6 +8,7 @@ public class PeopleController : MonoBehaviour
     
 
     public List<People> people = new List<People>();
+    public List<People> peopleInHouse = new List<People>();
 
     [SerializeField] List<People> selectedPeople = new List<People>();
     
