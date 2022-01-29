@@ -20,11 +20,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - HeavenBackground:
-        m_Texture: {fileID: 2800000, guid: 08bd10e119b655a45bda1c82ebccd275, type: 3}
+        m_Texture: {fileID: 2800000, guid: ad27840208d9df641b2e388fcf54e203, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - HellBackground:
-        m_Texture: {fileID: 2800000, guid: 7c54459c358ca9745b9f6c2cc95e0f27, type: 3}
+        m_Texture: {fileID: 2800000, guid: b920b271d06dea740b523516181eb949, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - RenderTex:
