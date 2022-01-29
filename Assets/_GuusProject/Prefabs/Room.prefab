@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2131712645125287374}
   - component: {fileID: 4912281669060446687}
   - component: {fileID: 4166890482909258599}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -67,8 +67,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   heavenRooms:
   - {fileID: 293620096173593322, guid: c46ff72eeded53b44be9fed1279b4dd4, type: 3}
+  - {fileID: 293620096173593322, guid: b705080da43147042926180fb3115c50, type: 3}
+  - {fileID: 293620096173593322, guid: 174c36a62ed67734da7b4642245216d5, type: 3}
   hellRooms:
   - {fileID: 293620096173593322, guid: 5bd3880384f552547a98fbd1eb26ffa0, type: 3}
+  - {fileID: 293620096173593322, guid: 8302cceef5c592747b470175da9e97a0, type: 3}
+  - {fileID: 293620096173593322, guid: 44eee8b8fb5765f44a6fa55507188f78, type: 3}
 --- !u!212 &4912281669060446687
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -76,7 +80,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16275916726991743}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -254,7 +258,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2070533126269732812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -284,7 +288,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2717428247799603239}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}

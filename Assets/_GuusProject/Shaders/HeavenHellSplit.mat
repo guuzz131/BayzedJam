@@ -50,8 +50,12 @@ Material:
     m_Ints: []
     m_Floats:
     - GradientPower: 1.17
+    - HueHeaven: 0
+    - HueHell: 0
     - NoiseScale: 100.7
     - PixelAmount: 485.8
+    - SaturationHeaven: 1
+    - SaturationHell: 1
     - ScrollSpeed: 1
     - StepEdge: 0.57
     m_Colors:

@@ -21,6 +21,13 @@ public class People : MonoBehaviour
         {
             transform.DOMove(room.transform.position, speed);
         }
-        
+        transform.GetChild(0).gameObject.SetActive(true);
+        StartCoroutine(Wait());
+    }
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(speed);
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 }

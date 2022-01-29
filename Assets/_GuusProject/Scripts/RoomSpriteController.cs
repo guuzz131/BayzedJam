@@ -16,15 +16,15 @@ public class RoomSpriteController : MonoBehaviour
     {
         if (isAngel)
         {
-            Debug.Log("If you see this i dont know whats wrong");
+            //Debug.Log("If you see this i dont know whats wrong");
             int randomRoom = Random.Range(0, heavenRooms.Length);
-            GameObject newVisualRoom = Instantiate(heavenRooms[randomRoom], transform.position, Quaternion.identity, transform);
+            GameObject newVisualRoom = Instantiate(heavenRooms[randomRoom], transform.position, transform.rotation, transform);
         }
         else
         {
-            Debug.Log("If you see this i dont know whats wrong 2");
+            //Debug.Log("If you see this i dont know whats wrong 2");
             int randomRoom = Random.Range(0, hellRooms.Length);
-            GameObject newVisualRoom = Instantiate(hellRooms[randomRoom], transform.position, Quaternion.identity, transform);
+            GameObject newVisualRoom = Instantiate(hellRooms[randomRoom], transform.position, transform.rotation, transform);
         }
     }
 }

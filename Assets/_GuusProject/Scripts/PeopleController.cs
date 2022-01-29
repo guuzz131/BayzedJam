@@ -7,7 +7,7 @@ public class PeopleController : MonoBehaviour
     [SerializeField] GameObject[] angelAndDevil;
     
 
-    [SerializeField] List<People> people = new List<People>();
+    public List<People> people = new List<People>();
 
     [SerializeField] List<People> selectedPeople = new List<People>();
     
@@ -15,7 +15,7 @@ public class PeopleController : MonoBehaviour
     [SerializeField] List<GameObject> hellRooms = new List<GameObject>();
     List<GameObject> hellAvailibleRooms = new List<GameObject>();
     [SerializeField] Transform[] hellQueuePos;
-    [SerializeField] List<People> devils = new List<People>();
+    public List<People> devils = new List<People>();
     [SerializeField] List<People> waitingDevils = new List<People>();
     [SerializeField] Transform devilsSpawnPos;
 
@@ -23,7 +23,7 @@ public class PeopleController : MonoBehaviour
     [SerializeField] List<GameObject> heavenRooms = new List<GameObject>();
     List<GameObject> heavenAvailibleRooms = new List<GameObject>();
     [SerializeField] Transform[] heavenQueuePos;
-    [SerializeField] List<People> angels = new List<People>();
+    public List<People> angels = new List<People>();
     [SerializeField] List<People> waitingAngels = new List<People>();
     [SerializeField] Transform angelSpawnPos;
 
@@ -90,55 +90,56 @@ public class PeopleController : MonoBehaviour
     IEnumerator SpawnPeople()
     {
         yield return new WaitForSeconds(spawnSpeed);
-
-        int randomSelect = Random.Range(0, 2);
-        GameObject newPerson = angelAndDevil[randomSelect]; //Random Angel or Devil
-
-        spawnSpeed = spawnSpeed * difficultyIncrease;
-        if (spawnSpeed < spawnSpeedMax) spawnSpeed = spawnSpeedMax; //SpawnSpeed adjustment
-
-        GameObject SpawnedPerson = Instantiate(newPerson, angelSpawnPos.position, Quaternion.identity); //Spawn new person
-        People person = SpawnedPerson.GetComponent<People>();
-        if(randomSelect == 0)
+        if (!Hotel.Instance.dead)
         {
-            angels.Add(person);
-            if (heavenAvailibleRooms.Count > 0)
+            int randomSelect = Random.Range(0, 2);
+            GameObject newPerson = angelAndDevil[randomSelect]; //Random Angel or Devil
+
+            spawnSpeed = spawnSpeed * difficultyIncrease;
+            if (spawnSpeed < spawnSpeedMax) spawnSpeed = spawnSpeedMax; //SpawnSpeed adjustment
+
+            GameObject SpawnedPerson = Instantiate(newPerson, angelSpawnPos.position, Quaternion.identity); //Spawn new person
+            People person = SpawnedPerson.GetComponent<People>();
+            if (randomSelect == 0)
             {
-                SpawnedPerson.transform.SetParent(hotelPivot, true);
-                MovePersonToNewRoom(person);
+                angels.Add(person);
+                if (heavenAvailibleRooms.Count > 0)
+                {
+                    SpawnedPerson.transform.SetParent(hotelPivot, true);
+                    MovePersonToNewRoom(person);
+                }
+                else
+                {
+
+                    if (heavenQueuePos.Length > waitingAngels.Count)
+                    {
+                        person.MoveToNewPosition(heavenQueuePos[waitingAngels.Count].position, null);
+                    }
+                    waitingAngels.Add(person);
+                }
             }
             else
             {
-
-                if (heavenQueuePos.Length > waitingAngels.Count)
+                devils.Add(person);
+                SpawnedPerson.transform.position = devilsSpawnPos.position;
+                if (hellAvailibleRooms.Count > 0)
                 {
-                    person.MoveToNewPosition(heavenQueuePos[waitingAngels.Count].position, null);
+                    SpawnedPerson.transform.SetParent(hotelPivot, true);
+                    MovePersonToNewRoom(person);
                 }
-                waitingAngels.Add(person);
-            }
-        }
-        else
-        {
-            angels.Add(person);
-            SpawnedPerson.transform.position = devilsSpawnPos.position;
-            if (hellAvailibleRooms.Count > 0)
-            {
-                SpawnedPerson.transform.SetParent(hotelPivot, true);
-                MovePersonToNewRoom(person);
-            }
-            else
-            {
-                if (hellQueuePos.Length > waitingDevils.Count)
+                else
                 {
-                    person.MoveToNewPosition(hellQueuePos[waitingDevils.Count].position, null);
+                    if (hellQueuePos.Length > waitingDevils.Count)
+                    {
+                        person.MoveToNewPosition(hellQueuePos[waitingDevils.Count].position, null);
+                    }
+                    waitingDevils.Add(person);
                 }
-                waitingDevils.Add(person);
             }
-        }
-        
-        people.Add(person);
-        StartCoroutine(SpawnPeople());
 
+            people.Add(person);
+            StartCoroutine(SpawnPeople());
+        }
     }
 
 
@@ -210,14 +211,14 @@ public class PeopleController : MonoBehaviour
             heavenRooms.Add(room);
             heavenAvailibleRooms.Add(room);
             room.GetComponent<RoomSpriteController>().ChangeSide(true);
-            Debug.Log("Angel: " + relativeRoomPos.x);
+            //Debug.Log("Angel: " + relativeRoomPos.x);
         }
         else
         {
             hellRooms.Add(room);
             hellAvailibleRooms.Add(room);
             room.GetComponent<RoomSpriteController>().ChangeSide(false);
-            Debug.Log("Devil: " + relativeRoomPos.x);
+            //Debug.Log("Devil: " + relativeRoomPos.x);
         }
         
         //heavenAvailibleRooms = heavenRooms;
