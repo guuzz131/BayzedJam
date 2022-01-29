@@ -7,11 +7,20 @@ public class People : MonoBehaviour
 {
     [SerializeField] float speed;
     public GameObject currentRoom;
+    public bool IsAngel;
 
     public void MoveToNewPosition(Vector3 newRoomPos, GameObject room)
     {
         currentRoom = room;
-        newRoomPos = new Vector3(newRoomPos.x, newRoomPos.y, transform.position.z);
-        transform.DOMove(newRoomPos, speed);
+        //newRoomPos = new Vector3(room.transform.position.x, room.transform.position.y, transform.position.z);
+        if(room == null)
+        {
+            transform.DOMove(newRoomPos, speed);
+        }
+        else
+        {
+            transform.DOMove(room.transform.position, speed);
+        }
+        
     }
 }

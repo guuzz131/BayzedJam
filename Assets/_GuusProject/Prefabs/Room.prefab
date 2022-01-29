@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3422641519751492225}
   - component: {fileID: 4912281669060446687}
   - component: {fileID: 4166890482909258599}
+  - component: {fileID: 620539258326800313}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -73,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -4352840662102571479, guid: 4a11838509d4ace4f85a94db4513da03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -110,3 +111,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &620539258326800313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 16275916726991743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97db0eafd0e9a9146ba6f3d3b9e6dcf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spriteRenderer: {fileID: 4912281669060446687}
+  neutralRoomSprite: {fileID: 7678687711835222387, guid: 4a11838509d4ace4f85a94db4513da03, type: 3}
+  heavenRoomSprites:
+  - {fileID: -4352840662102571479, guid: 4a11838509d4ace4f85a94db4513da03, type: 3}
+  hellRoomSprites:
+  - {fileID: 3888025872067625413, guid: 4a11838509d4ace4f85a94db4513da03, type: 3}

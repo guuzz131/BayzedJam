@@ -4,14 +4,40 @@ using UnityEngine;
 
 public class PeopleController : MonoBehaviour
 {
-    [SerializeField] List<People> people;
+    [SerializeField] GameObject[] angelAndDevil;
+    
 
-    [SerializeField] List<People> selectedPeople;
+    [SerializeField] List<People> people = new List<People>();
 
-    [SerializeField] List<GameObject> rooms;
-    List<GameObject> availibleRooms;
+    [SerializeField] List<People> selectedPeople = new List<People>();
 
+    [SerializeField] List<GameObject> rooms = new List<GameObject>();
+    
+    [Header("Devils")]
+    [SerializeField] List<GameObject> hellRooms = new List<GameObject>();
+    List<GameObject> hellAvailibleRooms = new List<GameObject>();
+    [SerializeField] Transform[] hellQueuePos;
+    [SerializeField] List<People> devils = new List<People>();
+    [SerializeField] List<People> waitingDevils = new List<People>();
+    [SerializeField] Transform devilsSpawnPos;
+
+    [Header("Angels")]
+    [SerializeField] List<GameObject> heavenRooms = new List<GameObject>();
+    List<GameObject> heavenAvailibleRooms = new List<GameObject>();
+    [SerializeField] Transform[] heavenQueuePos;
+    [SerializeField] List<People> angels = new List<People>();
+    [SerializeField] List<People> waitingAngels = new List<People>();
+    [SerializeField] Transform angelSpawnPos;
+
+    [Header("Other Stuff")]
     [SerializeField] Transform mouseSelectionField;
+    
+    [SerializeField] Transform hotelPivot;
+
+    //[SerializeField] AnimationCurve angelSpawnCurve;
+    [SerializeField] float spawnSpeed;
+    [SerializeField] float difficultyIncrease;
+    [SerializeField] float spawnSpeedMax;
 
     private Vector2 moveToPos;
     private Vector2 newRoomPos;
@@ -20,7 +46,8 @@ public class PeopleController : MonoBehaviour
 
     private void Start()
     {
-        availibleRooms = rooms;
+        CheckRoomSide();
+        StartCoroutine(SpawnPeople());
     }
     private void Update()
     {
@@ -49,12 +76,7 @@ public class PeopleController : MonoBehaviour
 
             foreach (var person in selectedPeople)
             {
-                if (person.currentRoom != null)
-                {
-                    availibleRooms.Add(person.currentRoom);
-                }
-                GetClosestAvailableRoom(moveToPos);
-                person.MoveToNewPosition(newRoomPos, newRoom);
+                MovePersonToNewRoom(person);
             }
         }
 
@@ -68,23 +90,139 @@ public class PeopleController : MonoBehaviour
         }
     }
 
-    private void GetClosestAvailableRoom(Vector2 closeTo)
+    IEnumerator SpawnPeople()
+    {
+        yield return new WaitForSeconds(spawnSpeed);
+
+        int randomSelect = Random.Range(0, 2);
+        GameObject newPerson = angelAndDevil[randomSelect]; //Random Angel or Devil
+
+        spawnSpeed = spawnSpeed * difficultyIncrease;
+        if (spawnSpeed < spawnSpeedMax) spawnSpeed = spawnSpeedMax; //SpawnSpeed adjustment
+
+        GameObject SpawnedPerson = Instantiate(newPerson, angelSpawnPos.position, Quaternion.identity); //Spawn new person
+        People person = SpawnedPerson.GetComponent<People>();
+        if(randomSelect == 0)
+        {
+            angels.Add(person);
+            if (heavenAvailibleRooms.Count > 0)
+            {
+                SpawnedPerson.transform.SetParent(hotelPivot, true);
+                MovePersonToNewRoom(person);
+            }
+            else
+            {
+
+                if (heavenQueuePos.Length > waitingAngels.Count)
+                {
+                    person.MoveToNewPosition(heavenQueuePos[waitingAngels.Count].position, null);
+                }
+                waitingAngels.Add(person);
+            }
+        }
+        else
+        {
+            angels.Add(person);
+            SpawnedPerson.transform.position = devilsSpawnPos.position;
+            if (hellAvailibleRooms.Count > 0)
+            {
+                SpawnedPerson.transform.SetParent(hotelPivot, true);
+                MovePersonToNewRoom(person);
+            }
+            else
+            {
+                if (hellQueuePos.Length > waitingDevils.Count)
+                {
+                    person.MoveToNewPosition(hellQueuePos[waitingDevils.Count].position, null);
+                }
+                waitingDevils.Add(person);
+            }
+        }
+        
+        people.Add(person);
+        StartCoroutine(SpawnPeople());
+
+    }
+
+
+    private void MovePersonToNewRoom(People person)
+    {
+        if (person.currentRoom != null && person.IsAngel)
+        {
+            heavenAvailibleRooms.Add(person.currentRoom);
+        } else if (person.currentRoom != null)
+        {
+            hellAvailibleRooms.Add(person.currentRoom);
+        }
+        GetClosestAvailableRoom(moveToPos, person.IsAngel);
+        person.MoveToNewPosition(newRoomPos, newRoom);
+    }
+
+
+    private void GetClosestAvailableRoom(Vector2 closeTo, bool isAngel)
     {
         float distance = Mathf.Infinity;
         int closestIndex = 0;
-        for (int i = 0; i < availibleRooms.Count; i++)
+
+        if (isAngel)
         {
-            float newDistance = Vector2.Distance(closeTo, availibleRooms[i].transform.position);
-            if (newDistance < distance)
+            for (int i = 0; i < heavenAvailibleRooms.Count; i++)
             {
-                distance = newDistance;
-                closestIndex = i;
+                float newDistance = Vector2.Distance(closeTo, heavenAvailibleRooms[i].transform.position);
+                if (newDistance < distance)
+                {
+                    distance = newDistance;
+                    closestIndex = i;
+                }
+            }
+
+            newRoomPos = heavenAvailibleRooms[closestIndex].transform.position;
+            newRoom = heavenAvailibleRooms[closestIndex];
+            heavenAvailibleRooms.RemoveAt(closestIndex);
+        }
+        else
+        {
+            for (int i = 0; i < hellAvailibleRooms.Count; i++)
+            {
+                float newDistance = Vector2.Distance(closeTo, hellAvailibleRooms[i].transform.position);
+                if (newDistance < distance)
+                {
+                    distance = newDistance;
+                    closestIndex = i;
+                }
+            }
+
+            newRoomPos = hellAvailibleRooms[closestIndex].transform.position;
+            newRoom = hellAvailibleRooms[closestIndex];
+            hellAvailibleRooms.RemoveAt(closestIndex);
+        }
+    }
+
+
+    void CheckRoomSide()
+    {
+        foreach(var room in rooms)
+        {
+            Vector2 relativeRoomPos = Vector2.zero;
+            if (room.transform.parent != null)
+            {
+                relativeRoomPos = room.transform.localPosition + room.transform.parent.localPosition;
+            }
+
+            if(relativeRoomPos.x < 0)
+            {
+                heavenRooms.Add(room);
+                //heavenAvailibleRooms.Add(room);
+                room.GetComponent<RoomSpriteController>().ChangeSide(true);
+            }
+            else
+            {
+                hellRooms.Add(room);
+                //hellAvailibleRooms.Add(room);
+                room.GetComponent<RoomSpriteController>().ChangeSide(false);
             }
         }
-
-        newRoomPos = availibleRooms[closestIndex].transform.position;
-        newRoom = availibleRooms[closestIndex];
-        availibleRooms.RemoveAt(closestIndex);
-        
+        heavenAvailibleRooms = heavenRooms;
+        hellAvailibleRooms = hellRooms;
     }
 }
