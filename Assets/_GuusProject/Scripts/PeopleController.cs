@@ -210,12 +210,14 @@ public class PeopleController : MonoBehaviour
             heavenRooms.Add(room);
             heavenAvailibleRooms.Add(room);
             room.GetComponent<RoomSpriteController>().ChangeSide(true);
+            Debug.Log("Angel: " + relativeRoomPos.x);
         }
         else
         {
             hellRooms.Add(room);
             hellAvailibleRooms.Add(room);
             room.GetComponent<RoomSpriteController>().ChangeSide(false);
+            Debug.Log("Devil: " + relativeRoomPos.x);
         }
         
         //heavenAvailibleRooms = heavenRooms;

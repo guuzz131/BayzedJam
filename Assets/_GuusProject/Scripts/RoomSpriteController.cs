@@ -4,27 +4,27 @@ using UnityEngine;
 
 public class RoomSpriteController : MonoBehaviour
 {
-    [SerializeField] SpriteRenderer spriteRenderer;
-    [SerializeField] Sprite neutralRoomSprite;
-    [SerializeField] Sprite[] heavenRoomSprites;
-    [SerializeField] Sprite[] hellRoomSprites;
+    [SerializeField] GameObject[] heavenRooms;
+    [SerializeField] GameObject[] hellRooms;
 
     private void OnEnable()
     {
-        spriteRenderer.sprite = neutralRoomSprite;
+        //spriteRenderer.sprite = neutralRoomSprite;
     }
 
     public void ChangeSide(bool isAngel)
     {
         if (isAngel)
         {
-            int randomRoom = Random.Range(0, heavenRoomSprites.Length);
-            spriteRenderer.sprite = heavenRoomSprites[randomRoom];
+            Debug.Log("If you see this i dont know whats wrong");
+            int randomRoom = Random.Range(0, heavenRooms.Length);
+            GameObject newVisualRoom = Instantiate(heavenRooms[randomRoom], transform.position, Quaternion.identity, transform);
         }
         else
         {
-            int randomRoom = Random.Range(0, hellRoomSprites.Length);
-            spriteRenderer.sprite = hellRoomSprites[randomRoom];
+            Debug.Log("If you see this i dont know whats wrong 2");
+            int randomRoom = Random.Range(0, hellRooms.Length);
+            GameObject newVisualRoom = Instantiate(hellRooms[randomRoom], transform.position, Quaternion.identity, transform);
         }
     }
 }
