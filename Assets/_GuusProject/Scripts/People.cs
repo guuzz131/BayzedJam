@@ -33,7 +33,7 @@ public class People : MonoBehaviour
         if (transform.parent != null && !FindObjectOfType<PeopleController>().peopleInHouse.Contains(this))
         {
             FindObjectOfType<PeopleController>().peopleInHouse.Add(this);
-            MoneyHandler.Instance.money += Random.Range(30, 40);
+            MoneyHandler.Instance.money += Random.Range(9, 17);
         }
     }
 

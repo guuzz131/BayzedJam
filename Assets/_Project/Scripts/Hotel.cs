@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class Hotel : MonoBehaviour
 {
@@ -93,6 +94,8 @@ public class Hotel : MonoBehaviour
         foreach (var person in peopleController.people)
         {
             person.transform.SetParent(brokenHotelParent, true);
+            person.transform.GetChild(0).gameObject.SetActive(true);
+            person.transform.up = Vector3.up;
         }
         rooms.Clear();
         StartCoroutine(WaitForKill());
@@ -105,14 +108,16 @@ public class Hotel : MonoBehaviour
         {
             foreach(var angel in peopleController.angels)
             {
-                angel.gameObject.SetActive(false);
+                angel.GetComponent<Animator>().Play("AngelDeath");
+                angel.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
         else
         {
             foreach (var devil in peopleController.devils)
             {
-                devil.gameObject.SetActive(false);
+                devil.GetComponent<Animator>().Play("DevilDeath");
+                devil.transform.GetChild(0).gameObject.SetActive(false);
             }
         }
         yield return new WaitForSeconds(2f);

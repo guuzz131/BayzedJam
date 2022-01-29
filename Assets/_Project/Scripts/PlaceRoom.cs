@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlaceRoom : MonoBehaviour
 {
     [SerializeField] private LayerMask mask;
+    [SerializeField] private NewBlockButton blockButton;
     private GameObject currentBlock;
     private GameObject currentPreview;
     private GameObject selectedRoomType;
@@ -18,12 +19,6 @@ public class PlaceRoom : MonoBehaviour
         if (showPreview)
         {
             ShowPreview();
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            showPreview = false;
-            Destroy(currentPreview);
         }
 
         if (showPreview && Input.GetMouseButtonDown(0) && HittingAnything())
@@ -57,6 +52,7 @@ public class PlaceRoom : MonoBehaviour
     {
         Instantiate(selectedRoomType, RoomPosition(), Hotel.Instance.transform.rotation, transform);
         showPreview = false;
+        blockButton.ExtendMenu();
     }
 
     private Vector2 GetMousePos()
