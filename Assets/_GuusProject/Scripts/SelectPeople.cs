@@ -14,6 +14,7 @@ public class SelectPeople : MonoBehaviour
         {
             selectedPeople.Add(collision.gameObject.GetComponent<People>());
             collision.GetComponent<SpriteRenderer>().color = Color.yellow;
+            collision.transform.GetChild(1).gameObject.SetActive(true);
         }   
     }
 
@@ -26,6 +27,7 @@ public class SelectPeople : MonoBehaviour
             {
                 selectedPeople.Remove(collision.gameObject.GetComponent<People>());
                 collision.GetComponent<SpriteRenderer>().color = Color.white;
+                collision.transform.GetChild(1).gameObject.SetActive(false);
             }
         }
         

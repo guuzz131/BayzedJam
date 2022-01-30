@@ -51,8 +51,25 @@ public class PeopleController : MonoBehaviour
     }
     private void Update()
     {
+
+        if (Input.GetMouseButtonDown(0) && selectedPeople.Count > 0)
+        {
+            moveToPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            foreach (var person in selectedPeople)
+            {
+                MovePersonToNewRoom(person);
+            }
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
+            foreach (var people in selectedPeople)
+            {
+                people.GetComponent<SpriteRenderer>().color = Color.white;
+                people.transform.GetChild(1).gameObject.SetActive(false);
+            }
+            selectedPeople.Clear();
             mouseSelectionField.gameObject.SetActive(true);
             mouseSelectionField.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         }
@@ -70,21 +87,12 @@ public class PeopleController : MonoBehaviour
             selectedPeople = mouseSelectionField.GetChild(0).GetComponent<SelectPeople>().selectedPeople;
         }
 
-        if (Input.GetMouseButtonDown(0) && selectedPeople.Count > 0)
-        {
-            moveToPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            foreach (var person in selectedPeople)
-            {
-                MovePersonToNewRoom(person);
-            }
-        }
-
         if (Input.GetMouseButtonDown(1))
         {
             foreach(var people in selectedPeople)
             {
                 people.GetComponent<SpriteRenderer>().color = Color.white;
+                people.transform.GetChild(1).gameObject.SetActive(false);
             }
             selectedPeople.Clear();
         }

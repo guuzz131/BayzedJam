@@ -9,14 +9,25 @@ public class People : MonoBehaviour
     public GameObject currentRoom;
     public bool IsAngel;
     public bool firstFlight;
+    bool isInRoom;
+    GameObject pivot;
 
     private void Awake()
     {
         StartCoroutine(FirstFlightWait());
+        pivot = GameObject.Find("HotelPivot");
     }
 
+    private void Update()
+    {
+        if (isInRoom && currentRoom != null && transform.parent == pivot.transform)
+        {
+            transform.position = currentRoom.transform.position;
+        }
+    }
     public void MoveToNewPosition(Vector3 newRoomPos, GameObject room)
     {
+        isInRoom = false;
         currentRoom = room;
         //newRoomPos = new Vector3(room.transform.position.x, room.transform.position.y, transform.position.z);
         if (room == null)
@@ -33,7 +44,6 @@ public class People : MonoBehaviour
         if (transform.parent != null && !FindObjectOfType<PeopleController>().peopleInHouse.Contains(this))
         {
             FindObjectOfType<PeopleController>().peopleInHouse.Add(this);
-            MoneyHandler.Instance.money += Random.Range(9, 17);
         }
     }
 
@@ -41,6 +51,9 @@ public class People : MonoBehaviour
     {
         yield return new WaitForSeconds(speed);
         transform.GetChild(0).gameObject.SetActive(false);
+        isInRoom = true;
+        if(gameObject.layer != 10) MoneyHandler.Instance.money += Random.Range(9, 17);
+        gameObject.layer = 10;
     }
 
     private IEnumerator FirstFlightWait()
