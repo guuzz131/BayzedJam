@@ -23,6 +23,8 @@ public class Hotel : MonoBehaviour
     [SerializeField] private StickToHighestRoom cam;
     [SerializeField] private PeopleScore peopleScore;
 
+    [SerializeField] private Animation background;
+
     public bool dead;
     bool reloadscene;
 
@@ -83,13 +85,13 @@ public class Hotel : MonoBehaviour
         Sound.Instance.Play(2);
         if(transform.rotation.z < 0)
         {
-            GetComponent<Animation>().clip = crumbleRightAni;
+            background.clip = crumbleLeftAni;
         }
         else
         {
-            GetComponent<Animation>().clip = crumbleLeftAni;
+            background.clip = crumbleRightAni;
         }
-        GetComponent<Animation>().Play();
+        background.Play();
         foreach (var room in rooms)
         {
             room.transform.SetParent(brokenHotelParent, true);
@@ -106,6 +108,10 @@ public class Hotel : MonoBehaviour
             person.transform.up = Vector3.up;
         }
         rooms.Clear();
+        for(int i = 1; i < transform.childCount; i++)
+        {
+            transform.GetChild(i).gameObject.SetActive(false);
+        }
         StartCoroutine(WaitForKill());
     }
 

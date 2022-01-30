@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_GuusProject/Scenes/TempScene.unity
+    guid: 7e5a5f98e7e267846b822ce521fb3f4a
+  - enabled: 1
     path: Assets/_GuusProject/Scenes/Menu.unity
     guid: 7f9713c2d096483459c895ec5aef4a00
   - enabled: 1

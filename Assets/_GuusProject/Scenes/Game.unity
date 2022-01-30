@@ -1347,7 +1347,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1918822350}
   m_Father: {fileID: 4421746926488586526}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7805,7 +7806,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8962350270843969136, guid: b37017628d6db3e4a837817d810a8e81, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8962350270843969136, guid: b37017628d6db3e4a837817d810a8e81, type: 3}
       propertyPath: m_AnchorMax.x
@@ -16673,6 +16674,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1096723175}
   - component: {fileID: 1096723174}
+  - component: {fileID: 1096723176}
   m_Layer: 0
   m_Name: SimpleBacc
   m_TagString: Untagged
@@ -16746,6 +16748,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!111 &1096723176
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096723173}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations:
+  - {fileID: 7400000, guid: 68d18e6b47867a3409dc5021a8385dfb, type: 2}
+  - {fileID: 7400000, guid: fa72be693be199049aa8d81ffc254d2d, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &1160840602
 GameObject:
   m_ObjectHideFlags: 0
@@ -19316,7 +19335,6 @@ GameObject:
   - component: {fileID: 1690822250}
   - component: {fileID: 1690822252}
   - component: {fileID: 1690822251}
-  - component: {fileID: 1690822253}
   m_Layer: 0
   m_Name: HotelPivot
   m_TagString: Untagged
@@ -19340,7 +19358,7 @@ Transform:
   - {fileID: 483297689}
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 15}
 --- !u!114 &1690822251
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19381,24 +19399,8 @@ MonoBehaviour:
   youLose: {fileID: 987027475}
   cam: {fileID: 7518328557386463143}
   peopleScore: {fileID: 595154312}
+  background: {fileID: 1096723176}
   dead: 0
---- !u!111 &1690822253
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1690822249}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 0}
-  m_Animations:
-  - {fileID: 7400000, guid: 68d18e6b47867a3409dc5021a8385dfb, type: 2}
-  - {fileID: 7400000, guid: fa72be693be199049aa8d81ffc254d2d, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 0
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &1698167073
 GameObject:
   m_ObjectHideFlags: 0
@@ -20829,7 +20831,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1690822250}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 41.247}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1865017663
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -20962,6 +20964,85 @@ RectTransform:
   m_AnchoredPosition: {x: 57.1, y: -35.3}
   m_SizeDelta: {x: 160, y: 51.71}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1918822349
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1918822350}
+  - component: {fileID: 1918822352}
+  - component: {fileID: 1918822351}
+  m_Layer: 5
+  m_Name: Score
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1918822350
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918822349}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 119902098}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 7.3, y: 12.2}
+  m_SizeDelta: {x: 160, y: 51.71}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1918822351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918822349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 652f7165b7c30ab46af6c4aad90a639b, type: 2}
+    m_FontSize: 32
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 94
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Score:'
+--- !u!222 &1918822352
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1918822349}
+  m_CullTransparentMesh: 1
 --- !u!114 &1925510000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23436,7 +23517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7518328557079406720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.00031102402, y: 4.0166597, z: -20}
+  m_LocalPosition: {x: 0.0003194242, y: 4.0166597, z: -20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 254261235}
@@ -23473,7 +23554,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7787482, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

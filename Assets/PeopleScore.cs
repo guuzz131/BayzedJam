@@ -14,7 +14,7 @@ public class PeopleScore : MonoBehaviour
 
     private void Start()
     {
-        PlayerPrefs.SetInt("Highscore", 0);
+        //PlayerPrefs.SetInt("Highscore", 0);
         Highscore = PlayerPrefs.GetInt("Highscore");
 
     }

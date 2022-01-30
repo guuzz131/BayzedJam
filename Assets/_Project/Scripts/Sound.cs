@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Sound : MonoBehaviour
 {
     public static Sound Instance;
@@ -13,8 +14,8 @@ public class Sound : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this);
         Instance = this;
+        
     }
 
     public void Play(int index)

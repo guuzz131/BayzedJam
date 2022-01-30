@@ -14,7 +14,6 @@ public class SelectPeople : MonoBehaviour
             selectedPeople.Add(collision.gameObject.GetComponent<People>());
             collision.GetComponent<SpriteRenderer>().color = Color.yellow;
             collision.transform.GetChild(1).gameObject.SetActive(true);
-            Sound.Instance.Play(5);
         }   
     }
 

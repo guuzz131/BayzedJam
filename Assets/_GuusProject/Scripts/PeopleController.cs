@@ -114,6 +114,13 @@ public class PeopleController : MonoBehaviour
                     waitingAngels.RemoveAt(0);
                 }
             }
+            if (waitingAngels.Count > 0)
+            {
+                for (int i = 0; i < waitingAngels.Count; i++)
+                {
+                    waitingAngels[i].MoveToNewPosition(heavenQueuePos[i].position, null);
+                }
+            }
             totalRoomCountAngel = heavenRooms.Count;
         }
         if(totalRoomCountDevil != hellRooms.Count)
@@ -125,6 +132,13 @@ public class PeopleController : MonoBehaviour
                     waitingDevils[0].transform.SetParent(hotelPivot, true);
                     MovePersonToNewRoom(waitingDevils[0]);
                     waitingDevils.RemoveAt(0);
+                }
+            }
+            if (waitingDevils.Count > 0)
+            {
+                for(int i = 0; i < waitingDevils.Count; i++)
+                {
+                    waitingDevils[i].MoveToNewPosition(hellQueuePos[i].position, null);
                 }
             }
             totalRoomCountDevil = hellRooms.Count;
@@ -162,10 +176,14 @@ public class PeopleController : MonoBehaviour
                             AlertAngels.SetActive(true);
                             AlertAngels.transform.localScale = new Vector3(1.2f, 1.2f, 1);
                         }
-                        if (heavenQueuePos.Length - 2 == waitingAngels.Count)
+                        else if (heavenQueuePos.Length - 2 == waitingAngels.Count)
                         {
                             AlertAngels.SetActive(true);
                             AlertAngels.transform.localScale = new Vector3(.7f, .7f, 1);
+                        }
+                        else
+                        {
+                            AlertAngels.SetActive(false);
                         }
                         person.MoveToNewPosition(heavenQueuePos[waitingAngels.Count].position, null);
                     }
@@ -195,10 +213,14 @@ public class PeopleController : MonoBehaviour
                             AlertDevils.SetActive(true);
                             AlertDevils.transform.localScale = new Vector3(1.2f, 1.2f, 1);
                         }
-                        if (hellQueuePos.Length - 2 == waitingDevils.Count)
+                        else if (hellQueuePos.Length - 2 == waitingDevils.Count)
                         {
                             AlertDevils.SetActive(true);
                             AlertDevils.transform.localScale = new Vector3(.7f, .7f, 1);
+                        }
+                        else
+                        {
+                            AlertDevils.SetActive(false);
                         }
                         person.MoveToNewPosition(hellQueuePos[waitingDevils.Count].position, null);
                     }

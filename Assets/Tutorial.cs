@@ -13,10 +13,14 @@ public class Tutorial : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("Highscore") > 0)
         {
+            Time.timeScale = 1;
             Destroy(gameObject);
         }
-        Time.timeScale = 0f;
-        OnInteract();
+        else
+        {
+            Time.timeScale = 0f;
+            OnInteract();
+        }
     }
     
     public void OnInteract()
