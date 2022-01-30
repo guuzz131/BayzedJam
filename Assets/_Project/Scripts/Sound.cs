@@ -11,7 +11,11 @@ public class Sound : MonoBehaviour
 
     [SerializeField] private AudioClip[] audioClips;
 
-    private void Awake() => Instance = this;
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+        Instance = this;
+    }
 
     public void Play(int index)
     {

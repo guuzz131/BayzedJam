@@ -239,6 +239,7 @@ MonoBehaviour:
   currentRoom: {fileID: 0}
   IsAngel: 0
   firstFlight: 0
+  addedCoinPref: {fileID: 4844799277591009837, guid: 0d0c817c1ef48924e8b1f4cfe33046e3, type: 3}
 --- !u!212 &8414495294324346372
 SpriteRenderer:
   m_ObjectHideFlags: 0

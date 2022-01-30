@@ -38,6 +38,11 @@ public class PeopleController : MonoBehaviour
     [SerializeField] float difficultyIncrease;
     [SerializeField] float spawnSpeedMax;
 
+
+    [SerializeField] GameObject AlertDevils;
+    [SerializeField] GameObject AlertAngels;
+
+
     private Vector2 moveToPos;
     private Vector2 newRoomPos;
     private GameObject newRoom;
@@ -149,10 +154,24 @@ public class PeopleController : MonoBehaviour
                 }
                 else
                 {
-
                     if (heavenQueuePos.Length > waitingAngels.Count)
                     {
+
+                        if (heavenQueuePos.Length - 1 == waitingAngels.Count)
+                        {
+                            AlertAngels.SetActive(true);
+                            AlertAngels.transform.localScale = new Vector3(1.2f, 1.2f, 1);
+                        }
+                        if (heavenQueuePos.Length - 2 == waitingAngels.Count)
+                        {
+                            AlertAngels.SetActive(true);
+                            AlertAngels.transform.localScale = new Vector3(.7f, .7f, 1);
+                        }
                         person.MoveToNewPosition(heavenQueuePos[waitingAngels.Count].position, null);
+                    }
+                    if (heavenQueuePos.Length == waitingAngels.Count)
+                    {
+                        Hotel.Instance.BreakHotel();
                     }
                     waitingAngels.Add(person);
                 }
@@ -170,7 +189,22 @@ public class PeopleController : MonoBehaviour
                 {
                     if (hellQueuePos.Length > waitingDevils.Count)
                     {
+                        
+                        if (hellQueuePos.Length - 1 == waitingDevils.Count)
+                        {
+                            AlertDevils.SetActive(true);
+                            AlertDevils.transform.localScale = new Vector3(1.2f, 1.2f, 1);
+                        }
+                        if (hellQueuePos.Length - 2 == waitingDevils.Count)
+                        {
+                            AlertDevils.SetActive(true);
+                            AlertDevils.transform.localScale = new Vector3(.7f, .7f, 1);
+                        }
                         person.MoveToNewPosition(hellQueuePos[waitingDevils.Count].position, null);
+                    }
+                    if (hellQueuePos.Length == waitingDevils.Count)
+                    {
+                        Hotel.Instance.BreakHotel();
                     }
                     waitingDevils.Add(person);
                 }

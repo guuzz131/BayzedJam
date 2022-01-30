@@ -21,6 +21,7 @@ public class Hotel : MonoBehaviour
     [SerializeField] private PeopleController peopleController;
     [SerializeField] private Animation youLose;
     [SerializeField] private StickToHighestRoom cam;
+    [SerializeField] private PeopleScore peopleScore;
 
     public bool dead;
     bool reloadscene;
@@ -64,7 +65,7 @@ public class Hotel : MonoBehaviour
         {
             BreakHotel();
             print("the hotel broke!");
-            dead = true;
+            
         }
     }
 
@@ -73,10 +74,12 @@ public class Hotel : MonoBehaviour
         rooms.Add(room);
     }
 
-    void BreakHotel()
+    public void BreakHotel()
     {
-        youLose.Play();
+        dead = true;
+        peopleScore.SaveHighscore();
         cam.enabled = false;
+        peopleController.enabled = false;
         Sound.Instance.Play(2);
         if(transform.rotation.z < 0)
         {
@@ -127,5 +130,7 @@ public class Hotel : MonoBehaviour
                 Sound.Instance.Play(3);
             }
         }
+        yield return new WaitForSeconds(1.5f);
+        youLose.Play();
     }
 }

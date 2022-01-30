@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class People : MonoBehaviour
@@ -11,7 +12,7 @@ public class People : MonoBehaviour
     public bool firstFlight;
     bool isInRoom;
     GameObject pivot;
-
+    [SerializeField] GameObject addedCoinPref;
     private void Awake()
     {
         StartCoroutine(FirstFlightWait());
@@ -53,7 +54,10 @@ public class People : MonoBehaviour
         transform.GetChild(0).gameObject.SetActive(false);
         if (gameObject.layer != 10 && transform.parent == pivot.transform)
         {
-            MoneyHandler.Instance.money += Random.Range(9, 17); 
+            int randomMoney = Random.Range(9, 17);
+            GameObject addedCoins = Instantiate(addedCoinPref, transform.position, Quaternion.identity);
+            addedCoins.GetComponentInChildren<Text>().text = "" + randomMoney;
+            MoneyHandler.Instance.money += randomMoney;
             Sound.Instance.Play(1);
             isInRoom = true;
             gameObject.layer = 10;
