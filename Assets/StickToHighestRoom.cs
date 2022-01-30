@@ -37,7 +37,7 @@ public class StickToHighestRoom : MonoBehaviour
         }
 
         oldHighRoom = highestRoom;
-        cam.m_Lens.OrthographicSize = Map(bounds.localScale.y, .5f, 1, 9, 19.4f);
+        cam.m_Lens.OrthographicSize = Map(bounds.localScale.y, .5f, 1, 4, 19.4f);
     }
 
     private float Map(float value, float from1, float to1, float from2, float to2)

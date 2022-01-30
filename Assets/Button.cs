@@ -16,6 +16,7 @@ public class Button : MonoBehaviour
         {
             FindObjectOfType<PlaceRoom>().SelectType(type[number]);
             FindObjectOfType<PlaceRoom>().SelectPreviewType(previewType[number]);
+            Sound.Instance.Play(0);
         }
         
     }

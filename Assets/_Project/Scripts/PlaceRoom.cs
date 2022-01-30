@@ -53,6 +53,7 @@ public class PlaceRoom : MonoBehaviour
         Instantiate(selectedRoomType, RoomPosition(), Hotel.Instance.transform.rotation, transform);
         showPreview = false;
         blockButton.ExtendMenu();
+        Sound.Instance.Play(4);
     }
 
     private Vector2 GetMousePos()

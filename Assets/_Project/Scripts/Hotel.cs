@@ -73,6 +73,7 @@ public class Hotel : MonoBehaviour
 
     void BreakHotel()
     {
+        Sound.Instance.Play(2);
         if(transform.rotation.z < 0)
         {
             GetComponent<Animation>().clip = crumbleRightAni;
@@ -110,6 +111,7 @@ public class Hotel : MonoBehaviour
             {
                 angel.GetComponent<Animator>().Play("AngelDeath");
                 angel.transform.GetChild(0).gameObject.SetActive(false);
+                Sound.Instance.Play(3);
             }
         }
         else
@@ -118,6 +120,7 @@ public class Hotel : MonoBehaviour
             {
                 devil.GetComponent<Animator>().Play("DevilDeath");
                 devil.transform.GetChild(0).gameObject.SetActive(false);
+                Sound.Instance.Play(3);
             }
         }
         yield return new WaitForSeconds(2f);

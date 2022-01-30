@@ -52,7 +52,8 @@ public class People : MonoBehaviour
         yield return new WaitForSeconds(speed);
         transform.GetChild(0).gameObject.SetActive(false);
         isInRoom = true;
-        if(gameObject.layer != 10) MoneyHandler.Instance.money += Random.Range(9, 17);
+        if (gameObject.layer != 10) { MoneyHandler.Instance.money += Random.Range(9, 17); Sound.Instance.Play(1); }
+        else { Sound.Instance.Play(6); }
         gameObject.layer = 10;
     }
 
