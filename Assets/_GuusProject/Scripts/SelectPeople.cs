@@ -5,7 +5,6 @@ using UnityEngine;
 public class SelectPeople : MonoBehaviour
 {
     public List<People> selectedPeople;
-    [SerializeField] LayerMask peopleLayer;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

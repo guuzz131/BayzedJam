@@ -19,6 +19,8 @@ public class Hotel : MonoBehaviour
     [SerializeField] private AnimationClip crumbleRightAni, crumbleLeftAni;
 
     [SerializeField] private PeopleController peopleController;
+    [SerializeField] private Animation youLose;
+    [SerializeField] private StickToHighestRoom cam;
 
     public bool dead;
     bool reloadscene;
@@ -73,6 +75,8 @@ public class Hotel : MonoBehaviour
 
     void BreakHotel()
     {
+        youLose.Play();
+        cam.enabled = false;
         Sound.Instance.Play(2);
         if(transform.rotation.z < 0)
         {
@@ -123,7 +127,5 @@ public class Hotel : MonoBehaviour
                 Sound.Instance.Play(3);
             }
         }
-        yield return new WaitForSeconds(2f);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
